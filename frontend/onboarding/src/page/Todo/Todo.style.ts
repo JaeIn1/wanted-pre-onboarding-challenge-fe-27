@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TiDelete } from "react-icons/ti";
 
 export const TodoLayout = styled.div`
   height: calc(100vh - ${({ theme }) => theme.navbarHeight});
@@ -30,11 +31,14 @@ export const TodoAddButton = styled.div`
 `;
 
 export const TodoItem = styled.div`
-  width: 300px;
-  background-color: rgba(0, 0, 0, 0.03);
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.01);
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.7);
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TodoDiv = styled.div`
@@ -43,7 +47,7 @@ export const TodoDiv = styled.div`
 `;
 
 export const TodoAddDiv = styled.div`
-  width: 300px;
+  width: 400px;
   display: flex;
   flex-direction: column;
 
@@ -69,6 +73,13 @@ export const AddButton = styled.button`
   color: white;
   padding: 10px 20px;
 
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const TodoDeleteIcon = styled(TiDelete)`
+  font-size: 1.3rem !important;
   &:hover {
     cursor: pointer;
   }

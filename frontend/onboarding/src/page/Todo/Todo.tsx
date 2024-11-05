@@ -3,7 +3,7 @@ import * as S from "./Todo.style";
 import NavbarPage from "../../components/Navbar/Navbar";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { getTodos, createTodo, updateTodo } from "../../apis/todo";
+import { getTodos, createTodo, updateTodo, deleteTodo } from "../../apis/todo";
 import { Todo } from "../../types/todo";
 
 const TodoPage = () => {
@@ -27,6 +27,7 @@ const TodoPage = () => {
     const fetchTodos = async () => {
       try {
         const response = await getTodos();
+        console.log(response.data);
         setTodos(response.data.data);
       } catch (error) {
         console.error("Todo 데이터를 가져오는 중 오류가 발생했습니다.", error);
@@ -73,11 +74,25 @@ const TodoPage = () => {
   const onClickTodoItem = (todo: Todo) => () => {
     setTitle(todo.title);
     setContent(todo.content);
-    setSelectedTodoId(todo.id);
+    // 타입 단언 사용
+    if (todo.id) {
+      setSelectedTodoId(todo.id);
+    } else {
+      setSelectedTodoId(null);
+    }
     setUpdateMode((prev) => !prev);
     setAddTodo(false);
   };
 
+  const onClickDelete = (todo: Todo) => async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const response = await deleteTodo(todo);
+    console.log(response.data);
+    alert("성공적으로 삭제 되었습니다.");
+
+    const updatedTodos = await getTodos();
+    setTodos(updatedTodos.data.data);
+  };
   return (
     <div>
       <NavbarPage />
@@ -99,7 +114,10 @@ const TodoPage = () => {
           <div>
             {todos.map((todo) => (
               <S.TodoItem key={todo.id} onClick={onClickTodoItem(todo)}>
-                {todo.title}
+                <span>{todo.title}</span>
+                <S.TodoDeleteIcon onClick={onClickDelete(todo)}>
+                  delete
+                </S.TodoDeleteIcon>
               </S.TodoItem>
             ))}
           </div>
