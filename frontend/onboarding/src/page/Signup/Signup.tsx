@@ -23,12 +23,11 @@ const SignupPage = () => {
       const res = await createUser(userData);
       console.log(res);
       alert("회원가입에 성공했습니다.");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       const axiosError = error as AxiosError;
-      if (axiosError.response) {
-        alert(axiosError.response.data.details);
-      }
+      const data = axiosError.response!.data as { details: string };
+      alert(data.details);
     }
   };
 
@@ -38,7 +37,10 @@ const SignupPage = () => {
       <S.SignupLayout>
         <S.SignupDiv>
           <S.SignupDivTop>
-            <h3>Signup</h3>
+            <div>
+              <span>Signup</span>
+              <span onClick={() => navigate("/")}>로그인</span>
+            </div>
             <S.SignupForm onSubmit={handleSubmit(onSubmit)}>
               <S.SignupFormDiv>
                 <input

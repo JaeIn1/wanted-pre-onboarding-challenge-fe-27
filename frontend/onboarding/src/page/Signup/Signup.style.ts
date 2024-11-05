@@ -27,6 +27,27 @@ export const SignupDivTop = styled.div`
   justify-content: center;
   align-content: center;
   margin-bottom: 30px;
+
+  & div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    & span:nth-child(1) {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    & span:nth-child(2) {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 1rem;
+      &:hover {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+  }
 `;
 
 export const SignupForm = styled.form`

@@ -27,9 +27,8 @@ const LoginPage = () => {
       navigate("/todo");
     } catch (error) {
       const axiosError = error as AxiosError;
-      if (axiosError.response) {
-        alert(axiosError.response.data.details);
-      }
+      const data = axiosError.response!.data as { details: string };
+      alert(data.details);
     }
   };
 
