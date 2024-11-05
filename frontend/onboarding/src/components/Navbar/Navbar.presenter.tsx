@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./Navbar.styles";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -7,6 +7,13 @@ const NavbarUIPage = () => {
   const [loginCheck, setLoginCheck] = useState<boolean>(false);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+
+  console.log("loginCheck : " + loginCheck, isAuthenticated);
+  useEffect(() => {
+    if (isAuthenticated) {
+      setLoginCheck(true);
+    }
+  }, [isAuthenticated]);
 
   const onMoveTodo = () => {
     if (isAuthenticated) {
@@ -30,6 +37,7 @@ const NavbarUIPage = () => {
   return (
     <S.NavbarLayout>
       <S.NavbarUl>
+        <li onClick={() => navigate("/")}>Home</li>
         <li onClick={onMoveTodo}>Todo</li>
         {loginCheck && <li onClick={Logout}>Logout</li>}
       </S.NavbarUl>
