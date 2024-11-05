@@ -40,8 +40,9 @@ export const SignupDivTop = styled.div`
     }
 
     & span:nth-child(2) {
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 1rem;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 0.8rem;
+      font-weight: bold;
       &:hover {
         cursor: pointer;
         color: rgba(0, 0, 0, 1);
@@ -62,7 +63,9 @@ export const SignupForm = styled.form`
 export const SignupFormDiv = styled.div`
   width: 100%;
   margin-bottom: 20px;
-
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
   & input {
     width: 100%;
     padding: 10px 20px;
@@ -80,17 +83,23 @@ export const SignupFormDiv = styled.div`
   }
 `;
 
-export const SignupButton = styled.button`
+interface SignupButtonProps {
+  isCheck: boolean;
+}
+
+export const SignupButton = styled.button<SignupButtonProps>`
   border: none;
   border-radius: 30px;
   background-color: black;
+  background-color: ${(props) => (props.isCheck ? "rgba(0,0,0,0.1)" : "black")};
   color: white;
   padding: 13px 20px;
   margin-top: 20px;
 `;
 
 export const ErrorText = styled.p`
+  width: 100%;
   color: tomato;
   font-size: 0.8rem;
-  margin-left: 10px;
+  margin-left: 30px;
 `;

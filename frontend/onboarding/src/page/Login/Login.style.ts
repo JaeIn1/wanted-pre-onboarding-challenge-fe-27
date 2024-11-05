@@ -42,10 +42,14 @@ export const LoginDivTop = styled.div`
   margin-bottom: 30px;
 `;
 
-export const LoginButton = styled.button`
+interface LoginButtonProps {
+  isCheck?: boolean;
+}
+
+export const LoginButton = styled.button<LoginButtonProps>`
   border: none;
   border-radius: 30px;
-  background-color: black;
+  background-color: ${(props) => (props.isCheck ? "rgba(0,0,0,0.1)" : "black")};
   color: white;
   padding: 13px 20px;
   margin: 5px;
