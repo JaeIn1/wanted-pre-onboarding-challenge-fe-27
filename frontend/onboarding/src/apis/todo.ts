@@ -7,12 +7,14 @@ export const createTodo = async (data: Todo): Promise<ResponseDTO<TodoDTO>> => {
   return await axiosInstance.post("/todos", data);
 };
 
-export const getTodos = async (): Promise<ResponseDTO<TodoDTO[]>> => {
+export const getTodos = async (): Promise<ResponseDTO<{ data: Todo[] }>> => {
   return await axiosInstance.get(`/todos`);
 };
 
-export const updateTodo = async (
-  data: TodoDTO
-): Promise<ResponseDTO<TodoDTO>> => {
+export const updateTodo = async (data: Todo): Promise<ResponseDTO<TodoDTO>> => {
   return await axiosInstance.put(`/todos/${data.id}`, data);
+};
+
+export const deleteTodo = async (data: Todo): Promise<ResponseDTO<TodoDTO>> => {
+  return await axiosInstance.delete(`/todos/${data.id}`);
 };
